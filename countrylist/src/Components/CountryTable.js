@@ -49,12 +49,12 @@ export default function CountryTable() {
     <>
       <TableContainer
         sx={{
-          maxWidth: 900,
+          maxWidth: 1000,
           margin: "0 auto",
           backgroundColor: "#E0F2F1",
         }}
         component={Paper}>
-        <Table sx={{}} aria-label='customized table'>
+        <Table aria-label='customized table'>
           <TableHead>
             <TableRow>
               <StyledTableCell>FLAG</StyledTableCell>
@@ -71,7 +71,7 @@ export default function CountryTable() {
                   <img className='flag' src={row.flags.png} alt={""} />
                 </StyledTableCell>
                 <StyledTableCell>
-                  <Link to={`/${row.name.common}`} className='table_link'>
+                  <Link to={`single/${row.name.common}`} className='table_link'>
                     {row.name.common}
                   </Link>
                   <span

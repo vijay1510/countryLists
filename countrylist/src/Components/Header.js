@@ -7,7 +7,8 @@ import HomeIcon from "@mui/icons-material/Home";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import Badge from "@mui/material/Badge";
 import SearchIcon from "@mui/icons-material/Search";
-import SwipeableEdgeDrawer from "./Cart";
+import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const MaterialUISwitch = styled(Switch)(({ theme }) => ({
   width: 62,
@@ -57,11 +58,19 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
 }));
 
 export default function Header() {
+  const fav = useSelector((state) => state.favourites);
   return (
     <>
       <div className='header'>
         <HomeIcon fontSize='large' />
-        <SwipeableEdgeDrawer />
+        <Link to='/favourite'>
+          <Badge badgeContent={fav.length} color='error'>
+            <span className='header_favicon'>
+              <FavoriteIcon fontSize='large' />
+            </span>
+          </Badge>
+        </Link>
+
         <FormGroup>
           <FormControlLabel
             control={<MaterialUISwitch sx={{ m: 1 }} defaultChecked />}

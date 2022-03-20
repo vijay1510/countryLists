@@ -6,7 +6,7 @@
   background-color: #26a69a;
   justify-content: space-evenly;
   align-items: center;
-  color: aliceblue;
+  color: whitesmoke;
   position: sticky;
 }
 
@@ -29,4 +29,9 @@
   position: relative;
   bottom: 65px;
   left: 15%;
+}
+
+.header_favicon {
+  color: whitesmoke;
+  margin-top: 2px;
 }

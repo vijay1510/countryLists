@@ -2,6 +2,7 @@
 @import "./Css/CountryTable.css";
 @import "./Css/SingleCountry.css";
 @import "./Css/Favourites.css";
+@import "./Css/AllFavourites.css";
 
 body,
 html {

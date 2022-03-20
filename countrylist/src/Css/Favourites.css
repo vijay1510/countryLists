@@ -1,12 +1,13 @@
 .fav_img {
-  width: 120px;
-  height: 80px;
+  width: 150px;
+  height: 100px;
+  border-radius: 10px;
 }
 .fav_container {
-  margin-left: 30px;
-  margin-top: 10px;
+  margin-right: 20px;
+  margin-bottom: 30px;
 }
 p {
-  margin-top: -5px;
+  margin-top: 5px;
   margin-left: 30px;
 }

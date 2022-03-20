@@ -1,12 +1,12 @@
 import React from "react";
 
-export default function Favourites() {
+export default function Favourites({ name, flag }) {
   return (
     <>
       <div className='fav_container'>
-        <img className='fav_img' src='https://flagcdn.com/w320/pe.png' />
+        <img className='fav_img' src={flag} alt={name} />
         <span>
-          <p>name</p>
+          <p>{name}</p>
         </span>
       </div>
     </>

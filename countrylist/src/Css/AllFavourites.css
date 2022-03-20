@@ -1,0 +1,20 @@
+.all_container {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  max-width: 1000px;
+  margin: 0 auto;
+  margin-top: 6%;
+
+  flex-wrap: wrap;
+}
+
+.all_h1 {
+  text-align: center;
+  text-transform: uppercase;
+}
+.all_button {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
