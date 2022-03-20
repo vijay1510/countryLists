@@ -7,8 +7,10 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import FavoriteOutlinedIcon from "@mui/icons-material/FavoriteOutlined";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllCountries } from "../Redux/Action";
+import { getAllCountries, addToFavor } from "../Redux/Action";
+import { Link } from "react-router-dom";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -33,7 +35,9 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 export default function CountryTable() {
   const countries = useSelector((state) => state.allCounrtry);
-  console.log(countries);
+  const favCountry = useSelector((state) => state.favourites);
+
+  console.log(favCountry.length);
 
   const dispatch = useDispatch();
 
@@ -45,7 +49,7 @@ export default function CountryTable() {
     <>
       <TableContainer
         sx={{
-          maxWidth: 1000,
+          maxWidth: 900,
           margin: "0 auto",
           backgroundColor: "#E0F2F1",
         }}
@@ -66,7 +70,24 @@ export default function CountryTable() {
                 <StyledTableCell component='th' scope='row'>
                   <img className='flag' src={row.flags.png} alt={""} />
                 </StyledTableCell>
-                <StyledTableCell>{row.name.common}</StyledTableCell>
+                <StyledTableCell>
+                  <Link to={`/${row.name.common}`} className='table_link'>
+                    {row.name.common}
+                  </Link>
+                  <span
+                    style={{
+                      color: favCountry.find(
+                        (e) => e.name.common === row.name.common
+                      )
+                        ? "red"
+                        : "lightblue",
+                    }}
+                    className='table_favicon'>
+                    <FavoriteOutlinedIcon
+                      onClick={() => dispatch(addToFavor(row))}
+                    />
+                  </span>
+                </StyledTableCell>
                 <StyledTableCell>{row?.capital}</StyledTableCell>
                 <StyledTableCell>{row?.region}</StyledTableCell>
                 <StyledTableCell>{row?.subregion}</StyledTableCell>

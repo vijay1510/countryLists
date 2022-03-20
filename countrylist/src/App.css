@@ -1,10 +1,12 @@
 @import "./Css/Header.css";
 @import "./Css/CountryTable.css";
+@import "./Css/SingleCountry.css";
+@import "./Css/Favourites.css";
 
 body,
 html {
   margin: 0;
   padding: 0;
   box-sizing: content-box;
-  background-color: #b2dfdb;
+  background-color: hsl(175, 47%, 90%);
 }

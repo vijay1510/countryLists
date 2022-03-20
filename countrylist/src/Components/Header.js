@@ -7,6 +7,7 @@ import HomeIcon from "@mui/icons-material/Home";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import Badge from "@mui/material/Badge";
 import SearchIcon from "@mui/icons-material/Search";
+import SwipeableEdgeDrawer from "./Cart";
 
 const MaterialUISwitch = styled(Switch)(({ theme }) => ({
   width: 62,
@@ -60,9 +61,7 @@ export default function Header() {
     <>
       <div className='header'>
         <HomeIcon fontSize='large' />
-        <Badge badgeContent={4} color='error'>
-          <FavoriteIcon fontSize='large' />
-        </Badge>
+        <SwipeableEdgeDrawer />
         <FormGroup>
           <FormControlLabel
             control={<MaterialUISwitch sx={{ m: 1 }} defaultChecked />}
