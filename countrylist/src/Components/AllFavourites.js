@@ -1,13 +1,15 @@
 import React from "react";
 import Favourites from "./Favourites";
 import HomeIcon from "@mui/icons-material/Home";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
+import { removeAll } from "../Redux/Action";
 
 export default function AllFavourites() {
   const fav = useSelector((state) => state.favourites);
   console.log(fav);
+  const dispatch = useDispatch();
   return (
     <>
       <div className='country_header'>
@@ -18,7 +20,11 @@ export default function AllFavourites() {
       <h1 className='all_h1'>Favourites</h1>
       <div className='all_button'>
         {fav.length !== 0 && (
-          <Button className='all_button' variant='contained' color='error'>
+          <Button
+            onClick={() => dispatch(removeAll())}
+            className='all_button'
+            variant='contained'
+            color='error'>
             REMOVE ALL
           </Button>
         )}

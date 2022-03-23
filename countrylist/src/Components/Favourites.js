@@ -6,7 +6,7 @@ export default function Favourites({ name, flag }) {
       <div className='fav_container'>
         <img className='fav_img' src={flag} alt={name} />
         <span>
-          <p>{name}</p>
+          <h3>{name}</h3>
         </span>
       </div>
     </>

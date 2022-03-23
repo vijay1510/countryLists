@@ -111,7 +111,9 @@ export default function SingleCountry() {
           </AccordionDetails>
         </Accordion>
       </div>
-      <h1 style={{ opacity: 0 }}>HELOO WORLD</h1>
+      <div>
+        <h1 style={{ opacity: 0 }}>heloo world</h1>
+      </div>
     </>
   );
 }

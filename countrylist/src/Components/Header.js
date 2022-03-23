@@ -8,7 +8,8 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import Badge from "@mui/material/Badge";
 import SearchIcon from "@mui/icons-material/Search";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { changeTheme } from "../Redux/Action";
 
 const MaterialUISwitch = styled(Switch)(({ theme }) => ({
   width: 62,
@@ -59,6 +60,16 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
 
 export default function Header() {
   const fav = useSelector((state) => state.favourites);
+  const { bgcolor } = useSelector((state) => state.theme);
+  const [checked, setChecked] = React.useState(
+    bgcolor === "#E0F2F1" ? false : true
+  );
+
+  const handleChange = (event) => {
+    setChecked(event.target.checked);
+  };
+
+  const dispatch = useDispatch();
   return (
     <>
       <div className='header'>
@@ -73,7 +84,14 @@ export default function Header() {
 
         <FormGroup>
           <FormControlLabel
-            control={<MaterialUISwitch sx={{ m: 1 }} defaultChecked />}
+            onClick={() => dispatch(changeTheme())}
+            control={
+              <MaterialUISwitch
+                sx={{ m: 1 }}
+                checked={checked}
+                onChange={handleChange}
+              />
+            }
             label=''
           />
         </FormGroup>

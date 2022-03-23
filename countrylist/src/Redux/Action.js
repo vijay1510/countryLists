@@ -5,11 +5,9 @@ export const getAllCountries = () => {
     try {
       const countries = await fetch("https://restcountries.com/v3.1/all");
       const countriesJson = await countries.json();
-      console.log(countriesJson);
+
       dispatch(allCountries(countriesJson));
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
 };
 
@@ -55,4 +53,18 @@ export const addToFavor = (data) => {
   };
 };
 
+//remove all
+export const removeAll = () => {
+  return {
+    type: "REMOVE_ALL",
+  };
+};
 //---------------------------------------------------
+//theme
+
+export const changeTheme = () => {
+  return {
+    type: "CHANGE_THEME",
+  };
+};
+//----------------------------------------------------------------------------

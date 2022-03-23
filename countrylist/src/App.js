@@ -4,11 +4,18 @@ import CountryTable from "./Components/CountryTable";
 import SingleCountry from "./Components/SingleCountry";
 import { Switch, Route } from "react-router-dom";
 import AllFavourites from "./Components/AllFavourites";
+import { useSelector } from "react-redux";
 
 function App() {
+  const { bgcolor, color } = useSelector((state) => state.theme);
+  console.log({ bgcolor }, { color });
   return (
     <>
-      <div style={{ backgroundColor: "hsl(175, 47%, 90%)", color: "black" }}>
+      <div
+        style={{
+          backgroundColor: bgcolor,
+          color: color,
+        }}>
         <Switch>
           <Route exact path='/'>
             <Header />

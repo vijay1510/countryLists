@@ -36,6 +36,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 export default function CountryTable() {
   const countries = useSelector((state) => state.allCounrtry);
   const favCountry = useSelector((state) => state.favourites);
+  const { bgcolor } = useSelector((state) => state.theme);
 
   console.log(favCountry.length);
 
@@ -51,7 +52,7 @@ export default function CountryTable() {
         sx={{
           maxWidth: 1000,
           margin: "0 auto",
-          backgroundColor: "#E0F2F1",
+          backgroundColor: bgcolor,
         }}
         component={Paper}>
         <Table aria-label='customized table'>
@@ -96,7 +97,7 @@ export default function CountryTable() {
           </TableBody>
         </Table>
       </TableContainer>
-      <h1>HELOO WORLD</h1>
+      <h1 style={{ opacity: 0 }}>HELOO WORLD</h1>
     </>
   );
 }

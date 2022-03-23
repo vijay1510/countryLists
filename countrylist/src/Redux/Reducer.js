@@ -3,6 +3,7 @@ const initialState = {
   erros: {},
   country: {},
   favourites: [],
+  theme: { bgcolor: "#E0F2F1", color: "black" },
 };
 
 export const reducer = (state = initialState, action) => {
@@ -36,6 +37,24 @@ export const reducer = (state = initialState, action) => {
       return {
         ...state,
         favourites: [...state.favourites, favCountry],
+      };
+    }
+    case "REMOVE_ALL": {
+      return {
+        ...state,
+        favourites: [],
+      };
+    }
+    case "CHANGE_THEME": {
+      if (state.theme.bgcolor === "#E0F2F1") {
+        return {
+          ...state,
+          theme: { bgcolor: "grey", color: "white" },
+        };
+      }
+      return {
+        ...state,
+        theme: { bgcolor: "#E0F2F1", color: "black" },
       };
     }
 
