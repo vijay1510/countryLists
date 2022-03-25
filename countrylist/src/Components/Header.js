@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState, useEffect } from "react";
 import { styled } from "@mui/material/styles";
 import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
@@ -9,7 +9,7 @@ import Badge from "@mui/material/Badge";
 import SearchIcon from "@mui/icons-material/Search";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { changeTheme } from "../Redux/Action";
+import { changeTheme, getSearch } from "../Redux/Action";
 
 const MaterialUISwitch = styled(Switch)(({ theme }) => ({
   width: 62,
@@ -59,6 +59,7 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
 }));
 
 export default function Header() {
+  const [value, setValue] = useState("");
   const fav = useSelector((state) => state.favourites);
   const { bgcolor } = useSelector((state) => state.theme);
   const [checked, setChecked] = React.useState(
@@ -70,6 +71,11 @@ export default function Header() {
   };
 
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getSearch(value));
+  }, [dispatch, value]);
+
   return (
     <>
       <div className='header'>
@@ -97,7 +103,13 @@ export default function Header() {
         </FormGroup>
       </div>
       <div className='header_box'>
-        <input className='header_input' placeholder='Search...' type='text' />
+        <input
+          className='header_input'
+          placeholder='Search By Country/Region'
+          type='text'
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
+        />
       </div>
       <span>
         <SearchIcon className='header_span' fontSize='large' />

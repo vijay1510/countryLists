@@ -68,3 +68,21 @@ export const changeTheme = () => {
   };
 };
 //----------------------------------------------------------------------------
+
+//search
+
+export const getSearch = (data) => {
+  return {
+    type: "SEARCH",
+    payload: data,
+  };
+};
+
+//----------------------------------------------------------------------------------------
+
+//sorting
+export const getSorting = () => {
+  return {
+    type: "SORTING",
+  };
+};

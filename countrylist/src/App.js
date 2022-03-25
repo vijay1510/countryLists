@@ -8,7 +8,7 @@ import { useSelector } from "react-redux";
 
 function App() {
   const { bgcolor, color } = useSelector((state) => state.theme);
-  console.log({ bgcolor }, { color });
+
   return (
     <>
       <div

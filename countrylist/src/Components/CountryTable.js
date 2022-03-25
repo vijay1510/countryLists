@@ -9,8 +9,9 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import FavoriteOutlinedIcon from "@mui/icons-material/FavoriteOutlined";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllCountries, addToFavor } from "../Redux/Action";
+import { getAllCountries, addToFavor, getSorting } from "../Redux/Action";
 import { Link } from "react-router-dom";
+import ArrowUpwardSharpIcon from "@mui/icons-material/ArrowUpwardSharp";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -35,10 +36,9 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 export default function CountryTable() {
   const countries = useSelector((state) => state.allCounrtry);
+  const searchCountries = useSelector((state) => state.searchCountries);
   const favCountry = useSelector((state) => state.favourites);
-  const { bgcolor } = useSelector((state) => state.theme);
-
-  console.log(favCountry.length);
+  const { color } = useSelector((state) => state.theme);
 
   const dispatch = useDispatch();
 
@@ -52,48 +52,126 @@ export default function CountryTable() {
         sx={{
           maxWidth: 1000,
           margin: "0 auto",
-          backgroundColor: bgcolor,
+          backgroundColor: "inherit",
         }}
         component={Paper}>
         <Table aria-label='customized table'>
           <TableHead>
             <TableRow>
-              <StyledTableCell>FLAG</StyledTableCell>
-              <StyledTableCell>NAME</StyledTableCell>
-              <StyledTableCell>CAPITAL</StyledTableCell>
-              <StyledTableCell>REGION</StyledTableCell>
-              <StyledTableCell>SUB-REGION</StyledTableCell>
+              <StyledTableCell align='center'>FLAG</StyledTableCell>
+              <StyledTableCell align='center'>
+                NAME
+                <ArrowUpwardSharpIcon
+                  onClick={() => dispatch(getSorting())}
+                  fontSize='small'
+                  color='error'
+                  style={{ cursor: "pointer" }}
+                />
+              </StyledTableCell>
+              <StyledTableCell align='left'>CAPITAL</StyledTableCell>
+              <StyledTableCell align='right'>REGION</StyledTableCell>
+              <StyledTableCell align='right'>POPULATION</StyledTableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {countries.map((row) => (
-              <StyledTableRow key={row.name.common}>
-                <StyledTableCell component='th' scope='row'>
-                  <img className='flag' src={row.flags.png} alt={""} />
-                </StyledTableCell>
-                <StyledTableCell>
-                  <Link to={`single/${row.name.common}`} className='table_link'>
-                    {row.name.common}
-                  </Link>
-                  <span
-                    style={{
-                      color: favCountry.find(
-                        (e) => e.name.common === row.name.common
-                      )
-                        ? "red"
-                        : "lightblue",
-                    }}
-                    className='table_favicon'>
-                    <FavoriteOutlinedIcon
-                      onClick={() => dispatch(addToFavor(row))}
-                    />
-                  </span>
-                </StyledTableCell>
-                <StyledTableCell>{row?.capital}</StyledTableCell>
-                <StyledTableCell>{row?.region}</StyledTableCell>
-                <StyledTableCell>{row?.subregion}</StyledTableCell>
-              </StyledTableRow>
-            ))}
+            {searchCountries &&
+              searchCountries?.map((row) => (
+                <StyledTableRow key={row.name.common} align='center'>
+                  <StyledTableCell component='th' scope='row' align='center'>
+                    <img className='flag' src={row.flags.png} alt={""} />
+                  </StyledTableCell>
+                  <StyledTableCell align='center'>
+                    <Link
+                      to={`single/${row.name.common}`}
+                      className='table_link'>
+                      {row.name.common}
+                    </Link>
+                    <span
+                      style={{
+                        color: favCountry.find(
+                          (e) => e.name.common === row.name.common
+                        )
+                          ? "red"
+                          : "lightblue",
+                      }}
+                      className='table_favicon'>
+                      <FavoriteOutlinedIcon
+                        onClick={() => dispatch(addToFavor(row))}
+                      />
+                    </span>
+                  </StyledTableCell>
+                  <StyledTableCell
+                    align='left'
+                    sx={{
+                      color: color,
+                    }}>
+                    {row?.capital}
+                  </StyledTableCell>
+                  <StyledTableCell
+                    align='center'
+                    sx={{
+                      color: color,
+                    }}>
+                    {row?.region}
+                  </StyledTableCell>
+                  <StyledTableCell
+                    align='center'
+                    sx={{
+                      color: color,
+                    }}>
+                    {row?.population}
+                  </StyledTableCell>
+                </StyledTableRow>
+              ))}
+            {searchCountries.length === 0 &&
+              countries.map((row) => (
+                <StyledTableRow key={row.name.common}>
+                  <StyledTableCell component='th' scope='row' align='center'>
+                    <img className='flag' src={row.flags.png} alt={""} />
+                  </StyledTableCell>
+                  <StyledTableCell align='center'>
+                    <Link
+                      to={`single/${row.name.common}`}
+                      className='table_link'>
+                      {row.name.common}
+                    </Link>
+                    <span
+                      style={{
+                        color: favCountry.find(
+                          (e) => e.name.common === row.name.common
+                        )
+                          ? "red"
+                          : "lightblue",
+                      }}
+                      className='table_favicon'>
+                      <FavoriteOutlinedIcon
+                        onClick={() => dispatch(addToFavor(row))}
+                      />
+                    </span>
+                  </StyledTableCell>
+                  <StyledTableCell
+                    align='left'
+                    sx={{
+                      color: color,
+                    }}>
+                    {row?.capital}
+                  </StyledTableCell>
+                  <StyledTableCell
+                    align='center'
+                    sx={{
+                      color: color,
+                    }}>
+                    {row?.region}
+                  </StyledTableCell>
+                  <StyledTableCell
+                    align='center'
+                    sx={{
+                      color: color,
+                    }}>
+                    {row?.population}
+                  </StyledTableCell>
+                </StyledTableRow>
+              ))}
           </TableBody>
         </Table>
       </TableContainer>

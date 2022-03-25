@@ -86,9 +86,10 @@ export default function SingleCountry() {
           </AccordionSummary>
           <AccordionDetails>
             <Typography>
-              {/* {Object.keys(singleCountry?.languages).map((e) => {
-                return <p>{singleCountry?.languages[e]}</p>;
-              })} */}
+              {singleCountry &&
+                Object.keys(singleCountry?.languages).map((e) => {
+                  return <p>{singleCountry?.languages[e]}</p>;
+                })}
             </Typography>
           </AccordionDetails>
         </Accordion>

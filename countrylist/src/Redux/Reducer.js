@@ -3,7 +3,8 @@ const initialState = {
   erros: {},
   country: {},
   favourites: [],
-  theme: { bgcolor: "#E0F2F1", color: "black" },
+  searchCountries: [],
+  theme: { bgcolor: "#E0F2F1", color: "#212121" },
 };
 
 export const reducer = (state = initialState, action) => {
@@ -49,12 +50,50 @@ export const reducer = (state = initialState, action) => {
       if (state.theme.bgcolor === "#E0F2F1") {
         return {
           ...state,
-          theme: { bgcolor: "grey", color: "white" },
+          theme: { bgcolor: "#616161", color: "white" },
         };
       }
       return {
         ...state,
-        theme: { bgcolor: "#E0F2F1", color: "black" },
+        theme: { bgcolor: "#E0F2F1", color: "#212121" },
+      };
+    }
+
+    case "SEARCH": {
+      const input = action.payload;
+
+      if (input) {
+        const searchData = state.allCounrtry.filter(
+          (e) =>
+            e.name.common.toLowerCase().includes(input.toLowerCase()) ||
+            e.region.toLowerCase().includes(input.toLowerCase())
+        );
+        console.log({ searchData });
+        return {
+          ...state,
+          searchCountries: searchData,
+        };
+      } else {
+        return {
+          ...state,
+          searchCountries: [],
+        };
+      }
+    }
+    case "SORTING": {
+      const sort = state.allCounrtry.sort((a, b) =>
+        a.name.common.toLowerCase() > b.name.common.toLowerCase() ? 1 : -1
+      );
+      const sortSearch =
+        state.searchCountries &&
+        state.searchCountries.sort((a, b) =>
+          a.name.common.toLowerCase() > b.name.common.toLowerCase() ? 1 : -1
+        );
+
+      return {
+        ...state,
+        allCounrtry: [...sort],
+        searchCountries: sortSearch && [...sortSearch],
       };
     }
 
