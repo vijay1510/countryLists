@@ -3,6 +3,7 @@
 @import "./Css/SingleCountry.css";
 @import "./Css/Favourites.css";
 @import "./Css/AllFavourites.css";
+@import url("https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto+Slab:wght@100;400;600&display=swap");
 
 body,
 html {
@@ -10,4 +11,6 @@ html {
   padding: 0;
   box-sizing: content-box;
   background-color: hsl(165, 5%, 85%);
+  font-family: "Pacifico", cursive;
+  font-family: "Roboto Slab", serif;
 }

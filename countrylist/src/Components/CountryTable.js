@@ -69,7 +69,7 @@ export default function CountryTable() {
                 />
               </StyledTableCell>
               <StyledTableCell align='left'>CAPITAL</StyledTableCell>
-              <StyledTableCell align='right'>REGION</StyledTableCell>
+              <StyledTableCell>REGION</StyledTableCell>
               <StyledTableCell align='right'>POPULATION</StyledTableCell>
             </TableRow>
           </TableHead>
