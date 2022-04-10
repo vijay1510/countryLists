@@ -7,11 +7,20 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import Button from "@mui/material/Button";
+
 import FavoriteOutlinedIcon from "@mui/icons-material/FavoriteOutlined";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllCountries, addToFavor, getSorting } from "../Redux/Action";
+import {
+  getAllCountries,
+  addToFavor,
+  getSorting,
+  getSortRegion,
+  getSortPopulation,
+} from "../Redux/Action";
 import { Link } from "react-router-dom";
 import ArrowUpwardSharpIcon from "@mui/icons-material/ArrowUpwardSharp";
+import CompareArrowsIcon from "@mui/icons-material/CompareArrows";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -38,6 +47,7 @@ export default function CountryTable() {
   const countries = useSelector((state) => state.allCounrtry);
   const searchCountries = useSelector((state) => state.searchCountries);
   const favCountry = useSelector((state) => state.favourites);
+  const sortBy = useSelector((state) => state.sortBy);
   const { color } = useSelector((state) => state.theme);
 
   const dispatch = useDispatch();
@@ -47,10 +57,11 @@ export default function CountryTable() {
   }, [dispatch]);
 
   return (
-    <>
+    <div style={{ marginTop: 70 }}>
       <TableContainer
         sx={{
-          maxWidth: 1000,
+          maxWidth: 1400,
+
           margin: "0 auto",
           backgroundColor: "inherit",
         }}
@@ -58,19 +69,96 @@ export default function CountryTable() {
         <Table aria-label='customized table'>
           <TableHead>
             <TableRow>
-              <StyledTableCell align='center'>FLAG</StyledTableCell>
               <StyledTableCell align='center'>
-                NAME
-                <ArrowUpwardSharpIcon
-                  onClick={() => dispatch(getSorting())}
-                  fontSize='small'
-                  color='error'
-                  style={{ cursor: "pointer" }}
-                />
+                <Button
+                  style={{
+                    cursor: "pointer",
+                    border: "none",
+                    fontSize: "larger",
+                  }}
+                  variant='outlined'>
+                  FLAG
+                </Button>
               </StyledTableCell>
-              <StyledTableCell align='left'>CAPITAL</StyledTableCell>
-              <StyledTableCell>REGION</StyledTableCell>
-              <StyledTableCell align='right'>POPULATION</StyledTableCell>
+              <StyledTableCell align='center'>
+                <Button
+                  style={{
+                    cursor: "pointer",
+                    border: "none",
+                    fontSize: "larger",
+                  }}
+                  variant='outlined'
+                  endIcon={
+                    <CompareArrowsIcon
+                      fontSize='small'
+                      color='error'
+                      style={{ marginLeft: -8, marginBottom: 4 }}
+                    />
+                  }
+                  onClick={() =>
+                    sortBy === "desc"
+                      ? dispatch(getSorting("desc"))
+                      : dispatch(getSorting("asc"))
+                  }>
+                  NAME
+                </Button>
+              </StyledTableCell>
+              <StyledTableCell>
+                <Button
+                  style={{
+                    cursor: "pointer",
+                    border: "none",
+                    fontSize: "larger",
+                    marginLeft: -20,
+                  }}
+                  variant='outlined'>
+                  CAPITAL
+                </Button>
+              </StyledTableCell>
+              <StyledTableCell align='center'>
+                <Button
+                  style={{
+                    cursor: "pointer",
+                    border: "none",
+                    fontSize: "larger",
+                  }}
+                  variant='outlined'
+                  endIcon={
+                    <CompareArrowsIcon
+                      color='error'
+                      style={{ marginLeft: -8, marginBottom: 4 }}
+                    />
+                  }
+                  onClick={() =>
+                    sortBy === "desc"
+                      ? dispatch(getSortRegion("desc"))
+                      : dispatch(getSortRegion("asc"))
+                  }>
+                  REGION
+                </Button>
+              </StyledTableCell>
+              <StyledTableCell align='center'>
+                <Button
+                  style={{
+                    cursor: "pointer",
+                    border: "none",
+                    fontSize: "larger",
+                  }}
+                  variant='outlined'
+                  endIcon={
+                    <CompareArrowsIcon
+                      color='error'
+                      style={{ marginLeft: -8, marginBottom: 4 }}
+                    />
+                  }
+                  onClick={() =>
+                    sortBy === "desc"
+                      ? dispatch(getSortPopulation("desc"))
+                      : dispatch(getSortPopulation("asc"))
+                  }>
+                  POPULATION <ArrowUpwardSharpIcon color='error' />
+                </Button>
+              </StyledTableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -101,14 +189,13 @@ export default function CountryTable() {
                     </span>
                   </StyledTableCell>
                   <StyledTableCell
-                    align='left'
                     sx={{
                       color: color,
                     }}>
                     {row?.capital}
                   </StyledTableCell>
                   <StyledTableCell
-                    align='center'
+                    align='left'
                     sx={{
                       color: color,
                     }}>
@@ -176,6 +263,6 @@ export default function CountryTable() {
         </Table>
       </TableContainer>
       <h1 style={{ opacity: 0 }}>HELOO WORLD</h1>
-    </>
+    </div>
   );
 }

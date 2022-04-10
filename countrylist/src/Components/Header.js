@@ -79,7 +79,12 @@ export default function Header() {
   return (
     <>
       <div className='header'>
-        <HomeIcon fontSize='large' />
+        <Link to='/'>
+          <span className='header_home'>
+            <HomeIcon fontSize='large' />
+          </span>
+        </Link>
+
         <Link to='/favourite'>
           <Badge badgeContent={fav.length} color='error'>
             <span className='header_favicon'>

@@ -5,6 +5,7 @@ const initialState = {
   favourites: [],
   searchCountries: [],
   theme: { bgcolor: "#E0F2F1", color: "#212121" },
+  sortBy: "asc",
 };
 
 export const reducer = (state = initialState, action) => {
@@ -23,7 +24,7 @@ export const reducer = (state = initialState, action) => {
     }
     case "ADD_TO_FAVOUR": {
       const favCountry = action.payload;
-      console.log({ favCountry });
+
       const isAvailable =
         state.favourites &&
         state.favourites.find((e) => e.name.common === favCountry.name.common);
@@ -81,19 +82,86 @@ export const reducer = (state = initialState, action) => {
       }
     }
     case "SORTING": {
-      const sort = state.allCounrtry.sort((a, b) =>
-        a.name.common.toLowerCase() > b.name.common.toLowerCase() ? 1 : -1
-      );
+      const sort = state.allCounrtry.sort((a, b) => {
+        if (action.payload === "desc") {
+          return a.name.common.toLowerCase() < b.name.common.toLowerCase()
+            ? 1
+            : -1;
+        } else if (action.payload === "asc") {
+          return a.name.common.toLowerCase() > b.name.common.toLowerCase()
+            ? 1
+            : -1;
+        }
+      });
       const sortSearch =
         state.searchCountries &&
-        state.searchCountries.sort((a, b) =>
-          a.name.common.toLowerCase() > b.name.common.toLowerCase() ? 1 : -1
-        );
+        state.searchCountries.sort((a, b) => {
+          if (action.payload === "desc") {
+            return a.name.common.toLowerCase() < b.name.common.toLowerCase()
+              ? 1
+              : -1;
+          } else if (action.payload === "asc") {
+            return a.name.common.toLowerCase() > b.name.common.toLowerCase()
+              ? 1
+              : -1;
+          }
+        });
 
       return {
         ...state,
         allCounrtry: [...sort],
         searchCountries: sortSearch && [...sortSearch],
+        sortBy: action.payload === "desc" ? "asc" : "desc",
+      };
+    }
+    case "SORT_REGION": {
+      const sort = state.allCounrtry.sort((a, b) => {
+        if (action.payload === "desc") {
+          return a.region.toLowerCase() < b.region.toLowerCase() ? 1 : -1;
+        } else if (action.payload === "asc") {
+          return a.region.toLowerCase() > b.region.toLowerCase() ? 1 : -1;
+        }
+      });
+      const sortSearch =
+        state.searchCountries &&
+        state.searchCountries.sort((a, b) => {
+          if (action.payload === "desc") {
+            return a.region.toLowerCase() < b.region.toLowerCase() ? 1 : -1;
+          } else if (action.payload === "asc") {
+            return a.region.toLowerCase() > b.region.toLowerCase() ? 1 : -1;
+          }
+        });
+
+      return {
+        ...state,
+        allCounrtry: [...sort],
+        searchCountries: sortSearch && [...sortSearch],
+        sortBy: action.payload === "desc" ? "asc" : "desc",
+      };
+    }
+    case "SORT_POPULATION": {
+      const sort = state.allCounrtry.sort((a, b) => {
+        if (action.payload === "desc") {
+          return a.population < b.population ? 1 : -1;
+        } else if (action.payload === "asc") {
+          return a.population > b.population ? 1 : -1;
+        }
+      });
+      const sortSearch =
+        state.searchCountries &&
+        state.searchCountries.sort((a, b) => {
+          if (action.payload === "desc") {
+            return a.population < b.population;
+          } else if (action.payload === "asc") {
+            return a.population > b.population ? 1 : -1;
+          }
+        });
+
+      return {
+        ...state,
+        allCounrtry: [...sort],
+        searchCountries: sortSearch && [...sortSearch],
+        sortBy: action.payload === "desc" ? "asc" : "desc",
       };
     }
 

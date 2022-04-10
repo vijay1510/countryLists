@@ -81,8 +81,22 @@ export const getSearch = (data) => {
 //----------------------------------------------------------------------------------------
 
 //sorting
-export const getSorting = () => {
+export const getSorting = (data) => {
   return {
     type: "SORTING",
+    payload: data,
+  };
+};
+
+export const getSortRegion = (data) => {
+  return {
+    type: "SORT_REGION",
+    payload: data,
+  };
+};
+export const getSortPopulation = (data) => {
+  return {
+    type: "SORT_POPULATION",
+    payload: data,
   };
 };

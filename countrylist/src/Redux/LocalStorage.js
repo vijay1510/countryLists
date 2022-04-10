@@ -1,6 +1,6 @@
 export const loadState = () => {
   try {
-    const localState = localStorage.getItem("state");
+    const localState = localStorage.getItem("country");
     if (localState === null) {
       return undefined;
     }
@@ -13,7 +13,7 @@ export const loadState = () => {
 export const saveState = (state) => {
   try {
     const localState = JSON.stringify(state);
-    localStorage.setItem("state", localState);
+    localStorage.setItem("country", localState);
   } catch (err) {
     return err;
   }

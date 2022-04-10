@@ -1,3 +1,7 @@
+.single {
+  margin-top: 80px;
+}
+
 .country_header {
   display: flex;
   width: 100%;
@@ -30,7 +34,7 @@
 
 .country_name {
   text-align: center;
-  margin-top: 50px;
+  margin-top: 5px;
   font-size: 1.8rem;
   text-transform: uppercase;
 }
