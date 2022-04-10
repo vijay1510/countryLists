@@ -100,3 +100,9 @@ export const getSortPopulation = (data) => {
     payload: data,
   };
 };
+export const getSortCapital = (data) => {
+  return {
+    type: "SORT_CAPITAL",
+    payload: data,
+  };
+};

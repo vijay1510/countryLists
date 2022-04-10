@@ -1,6 +1,5 @@
 import "./App.css";
 import Header from "./Components/Header";
-
 import CountryTable from "./Components/CountryTable";
 import SingleCountry from "./Components/SingleCountry";
 import { Switch, Route } from "react-router-dom";

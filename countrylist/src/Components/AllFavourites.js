@@ -8,7 +8,6 @@ import { removeAll } from "../Redux/Action";
 
 export default function AllFavourites() {
   const fav = useSelector((state) => state.favourites);
-
   const dispatch = useDispatch();
   return (
     <div className='allfav'>

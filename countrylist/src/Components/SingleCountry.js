@@ -86,7 +86,7 @@ export default function SingleCountry() {
                 {singleCountry &&
                   Object.keys(singleCountry?.languages).map((e) => {
                     return (
-                      <h4 key={defaultKey()}>{singleCountry?.languages[e]}</h4>
+                      <li key={defaultKey()}>{singleCountry?.languages[e]}</li>
                     );
                   })}
               </Typography>

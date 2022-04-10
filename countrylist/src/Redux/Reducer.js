@@ -24,7 +24,6 @@ export const reducer = (state = initialState, action) => {
     }
     case "ADD_TO_FAVOUR": {
       const favCountry = action.payload;
-
       const isAvailable =
         state.favourites &&
         state.favourites.find((e) => e.name.common === favCountry.name.common);
@@ -62,14 +61,13 @@ export const reducer = (state = initialState, action) => {
 
     case "SEARCH": {
       const input = action.payload;
-
       if (input) {
         const searchData = state.allCounrtry.filter(
           (e) =>
             e.name.common.toLowerCase().includes(input.toLowerCase()) ||
             e.region.toLowerCase().includes(input.toLowerCase())
         );
-        console.log({ searchData });
+
         return {
           ...state,
           searchCountries: searchData,
@@ -82,6 +80,7 @@ export const reducer = (state = initialState, action) => {
       }
     }
     case "SORTING": {
+      // eslint-disable-next-line array-callback-return
       const sort = state.allCounrtry.sort((a, b) => {
         if (action.payload === "desc") {
           return a.name.common.toLowerCase() < b.name.common.toLowerCase()
@@ -93,8 +92,10 @@ export const reducer = (state = initialState, action) => {
             : -1;
         }
       });
+
       const sortSearch =
         state.searchCountries &&
+        // eslint-disable-next-line array-callback-return
         state.searchCountries.sort((a, b) => {
           if (action.payload === "desc") {
             return a.name.common.toLowerCase() < b.name.common.toLowerCase()
@@ -115,6 +116,7 @@ export const reducer = (state = initialState, action) => {
       };
     }
     case "SORT_REGION": {
+      // eslint-disable-next-line array-callback-return
       const sort = state.allCounrtry.sort((a, b) => {
         if (action.payload === "desc") {
           return a.region.toLowerCase() < b.region.toLowerCase() ? 1 : -1;
@@ -124,6 +126,7 @@ export const reducer = (state = initialState, action) => {
       });
       const sortSearch =
         state.searchCountries &&
+        // eslint-disable-next-line array-callback-return
         state.searchCountries.sort((a, b) => {
           if (action.payload === "desc") {
             return a.region.toLowerCase() < b.region.toLowerCase() ? 1 : -1;
@@ -140,6 +143,7 @@ export const reducer = (state = initialState, action) => {
       };
     }
     case "SORT_POPULATION": {
+      // eslint-disable-next-line array-callback-return
       const sort = state.allCounrtry.sort((a, b) => {
         if (action.payload === "desc") {
           return a.population < b.population ? 1 : -1;
@@ -149,11 +153,63 @@ export const reducer = (state = initialState, action) => {
       });
       const sortSearch =
         state.searchCountries &&
+        // eslint-disable-next-line array-callback-return
         state.searchCountries.sort((a, b) => {
           if (action.payload === "desc") {
-            return a.population < b.population;
+            return a.population < b.population ? 1 : -1;
           } else if (action.payload === "asc") {
             return a.population > b.population ? 1 : -1;
+          }
+        });
+
+      return {
+        ...state,
+        allCounrtry: [...sort],
+        searchCountries: sortSearch && [...sortSearch],
+        sortBy: action.payload === "desc" ? "asc" : "desc",
+      };
+    }
+    case "SORT_CAPITAL": {
+      // eslint-disable-next-line array-callback-return
+      const sort = state.allCounrtry.sort((a, b) => {
+        if (
+          action.payload === "desc" &&
+          a.capital !== undefined &&
+          b.capital !== undefined
+        ) {
+          return a.capital[0].toLowerCase() < b.capital[0].toLowerCase()
+            ? 1
+            : -1;
+        } else if (
+          action.payload === "asc" &&
+          a.capital !== undefined &&
+          b.capital !== undefined
+        ) {
+          return a.capital[0].toLowerCase() > b.capital[0].toLowerCase()
+            ? 1
+            : -1;
+        }
+      });
+      const sortSearch =
+        state.searchCountries &&
+        // eslint-disable-next-line array-callback-return
+        state.searchCountries.sort((a, b) => {
+          if (
+            action.payload === "desc" &&
+            a.capital !== undefined &&
+            b.capital !== undefined
+          ) {
+            return a.capital[0].toLowerCase() < b.capital[0].toLowerCase()
+              ? 1
+              : -1;
+          } else if (
+            action.payload === "asc" &&
+            a.capital !== undefined &&
+            b.capital !== undefined
+          ) {
+            return a.capital[0].toLowerCase() > b.capital[0].toLowerCase()
+              ? 1
+              : -1;
           }
         });
 

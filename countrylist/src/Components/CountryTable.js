@@ -17,9 +17,9 @@ import {
   getSorting,
   getSortRegion,
   getSortPopulation,
+  getSortCapital,
 } from "../Redux/Action";
 import { Link } from "react-router-dom";
-import ArrowUpwardSharpIcon from "@mui/icons-material/ArrowUpwardSharp";
 import CompareArrowsIcon from "@mui/icons-material/CompareArrows";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -109,9 +109,21 @@ export default function CountryTable() {
                     cursor: "pointer",
                     border: "none",
                     fontSize: "larger",
-                    marginLeft: -20,
+                    marginLeft: -25,
                   }}
-                  variant='outlined'>
+                  variant='outlined'
+                  endIcon={
+                    <CompareArrowsIcon
+                      fontSize='small'
+                      color='error'
+                      style={{ marginLeft: -8, marginBottom: 4 }}
+                    />
+                  }
+                  onClick={() =>
+                    sortBy === "desc"
+                      ? dispatch(getSortCapital("desc"))
+                      : dispatch(getSortCapital("asc"))
+                  }>
                   CAPITAL
                 </Button>
               </StyledTableCell>
@@ -125,6 +137,7 @@ export default function CountryTable() {
                   variant='outlined'
                   endIcon={
                     <CompareArrowsIcon
+                      fontSize='large'
                       color='error'
                       style={{ marginLeft: -8, marginBottom: 4 }}
                     />
@@ -156,7 +169,7 @@ export default function CountryTable() {
                       ? dispatch(getSortPopulation("desc"))
                       : dispatch(getSortPopulation("asc"))
                   }>
-                  POPULATION <ArrowUpwardSharpIcon color='error' />
+                  POPULATION
                 </Button>
               </StyledTableCell>
             </TableRow>
